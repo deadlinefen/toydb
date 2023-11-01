@@ -15,16 +15,24 @@ if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_EXTENSIONS OFF)
 endif(NOT CMAKE_CXX_STANDARD)
 
+set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 
 include_directories(
-    ${BASE_DIR}/
+    "${BASE_DIR}/"
 )
 
 add_subdirectory("${BASE_DIR}/storage")
+add_subdirectory("${BASE_DIR}/rpc/gensrc")
+add_subdirectory("${BASE_DIR}/service")
 
 add_executable(toykv
   "toykv.cc"
+)
+
+target_link_libraries(toykv
+  Storage
+  libfmt.a
 )

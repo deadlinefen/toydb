@@ -1,0 +1,22 @@
+syntax="proto3";
+
+package toykv;
+
+message PFieldMeta {
+    enum PFieldType {
+        INT = 0;
+        FLOAT = 1;
+        CHAR = 2;
+        VARCHAR = 3;    
+        DATE = 4;
+    }
+    PFieldType type = 1;
+    string name = 2;
+    uint32 length = 3;
+    bool nullable = 4;
+}
+
+message PTableMeta {
+    uint64 id = 1;
+    repeated PFieldMeta fields = 2;
+}
